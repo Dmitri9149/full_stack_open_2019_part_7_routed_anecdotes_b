@@ -117,6 +117,9 @@ const App = () => {
     setAnecdotes(anecdotes.concat(anecdote))
   }
 
+  const anecdoteById = (id) =>
+  anecdotes.find(a => a.id === id)
+
   const vote = (id) => {
     const anecdote = anecdoteById(id)
 
@@ -130,7 +133,7 @@ const App = () => {
 
   const padding = { padding: 5 }
 
-  const anecdoteById = (id) =>
+  const anecdoteById_1 = (id) =>
     anecdotes.find(anecdote => anecdote.id == Number(id))
 
   return (
@@ -148,7 +151,7 @@ const App = () => {
           <Route path="/create" render={() => <CreateNew addNew = {addNew}/>} />
           <Route path="/about" render={() => <About />} />
           <Route exact path = "/:id" render= {({match})=> 
-            <Anecdote anecdote = {anecdoteById(match.params.id)} />
+            <Anecdote anecdote = {anecdoteById_1(match.params.id)} />
           } />
 
         </div>
