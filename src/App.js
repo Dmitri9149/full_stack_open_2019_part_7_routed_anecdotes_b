@@ -83,6 +83,7 @@ const CreateNew = (props) => {
 
 }
 
+
 const Anecdote = ({anecdote}) => (
   <div>
     <h2>{anecdote.content}</h2>
@@ -118,7 +119,7 @@ const App = () => {
   }
 
   const anecdoteById = (id) =>
-  anecdotes.find(a => a.id === id)
+  anecdotes.find(a => a.id === Number(id))
 
   const vote = (id) => {
     const anecdote = anecdoteById(id)
@@ -133,8 +134,6 @@ const App = () => {
 
   const padding = { padding: 5 }
 
-  const anecdoteById_1 = (id) =>
-    anecdotes.find(anecdote => anecdote.id == Number(id))
 
   return (
     <div>
@@ -148,10 +147,10 @@ const App = () => {
             <Link style={padding} to="/about">about</Link>
           </div>
           <Route exact path="/" render={() => <AnecdoteList anecdotes = {anecdotes}/>} />
-          <Route path="/create" render={() => <CreateNew addNew = {addNew}/>} />
-          <Route path="/about" render={() => <About />} />
+          <Route exact path="/create" render={() => <CreateNew addNew = {addNew}/>} />
+          <Route exact path="/about" render={() => <About />} />
           <Route exact path = "/:id" render= {({match})=> 
-            <Anecdote anecdote = {anecdoteById_1(match.params.id)} />
+            <Anecdote anecdote = {anecdoteById(match.params.id)} />
           } />
 
         </div>
