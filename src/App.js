@@ -91,6 +91,7 @@ const Anecdote = ({anecdote}) => (
 
 )
 
+Login = withRouter(Login)
 
 const App = () => {
   const [anecdotes, setAnecdotes] = useState([
