@@ -7,6 +7,8 @@ import {
 
 import { Container } from 'semantic-ui-react'
 import { Table } from 'semantic-ui-react'
+import { Form, Button } from 'semantic-ui-react'
+
 
 
 const AnecdoteList = ({ anecdotes }) => (
@@ -73,21 +75,21 @@ const CreateNewNoHistory = (props) => {
   return (
     <div>
       <h2>create a new anecdote</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          content
+      <Form onSubmit={handleSubmit}>
+        <Form.Field>
+          <label>content</label>
           <input name='content' value={content} onChange={(e) => setContent(e.target.value)} />
-        </div>
-        <div>
-          author
-          <input name='author' value={author} onChange={(e) => setAuthor(e.target.value)} />
-        </div>
-        <div>
-          url for more info
+        </Form.Field>
+        <Form.Field>
+          <label>author</label>
+          <input name='content' value={content} onChange={(e) => setContent(e.target.value)} />
+        </Form.Field>
+        <Form.Field>
+          <label>url for more info</label>
           <input name='info' value={info} onChange={(e) => setInfo(e.target.value)} />
-        </div>
-        <button>create</button>
-      </form>
+        </Form.Field>
+        <Button type = 'submit'>create</Button>
+      </Form>
     </div>
   )
 
@@ -129,7 +131,7 @@ const App = () => {
   const addNew = (anecdote) => {
     anecdote.id = (Math.random() * 10000).toFixed(0)
     setAnecdotes(anecdotes.concat(anecdote))
-    setNotification (`A new anedote ${anecdote.content} created`)
+    setNotification (`A new anecdote ${anecdote.content} created`)
     setTimeout (()=> {setNotification('')}, 10000)
   }
 
