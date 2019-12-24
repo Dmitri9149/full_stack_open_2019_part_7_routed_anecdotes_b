@@ -84,13 +84,14 @@ const CreateNew = (props) => {
 }
 
 
-const Anecdote = ({anecdote}) => (
+const Anecdote = ({anecdote}) => {
+  return(
   <div>
     <h2>{anecdote.content}</h2>
     <div>{anecdote.votes}</div>
   </div>
-
-)
+  )
+}
 
 
 const App = () => {
@@ -118,8 +119,11 @@ const App = () => {
     setAnecdotes(anecdotes.concat(anecdote))
   }
 
-  const anecdoteById = (id) =>
-  anecdotes.find(a => a.id === Number(id))
+  const anecdoteById = (id) => {
+    return(
+      anecdotes.find(a => a.id === id) 
+    )
+  }
 
   const vote = (id) => {
     const anecdote = anecdoteById(id)
@@ -149,10 +153,9 @@ const App = () => {
           <Route exact path="/" render={() => <AnecdoteList anecdotes = {anecdotes}/>} />
           <Route exact path="/create" render={() => <CreateNew addNew = {addNew}/>} />
           <Route exact path="/about" render={() => <About />} />
-          <Route exact path = "/:id" render= {({match})=> 
+          <Route exct path = "/anecdotes/:id" render= {({match})=> 
             <Anecdote anecdote = {anecdoteById(match.params.id)} />
           } />
-
 
         </div>
       </Router>
