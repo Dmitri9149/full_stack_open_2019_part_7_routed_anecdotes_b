@@ -7,7 +7,7 @@ import {
 
 import { Container } from 'semantic-ui-react'
 import { Table } from 'semantic-ui-react'
-import { Form, Button, Message } from 'semantic-ui-react'
+import { Form, Button, Message, Menu } from 'semantic-ui-react'
 
 
 
@@ -162,20 +162,21 @@ const App = () => {
           {notification}
         </Message>
       )}
-
-    <div>
-      <h1>Software anecdotes</h1>
-      <div>
-        {notification}
-      </div>
-      <div>
       <Router>
         <div>
-          <div>
-            <Link style={padding} to="/">anecdotes</Link>
-            <Link style={padding} to="/create">create new</Link>
-            <Link style={padding} to="/about">about</Link>
-          </div>
+          <Menu inverted>
+            <Menu.Item link>
+              <Link  to="/">anecdotes</Link>
+            </Menu.Item>
+            <Menu.Item link>
+              <Link  to="/create">create new</Link>
+            </Menu.Item>
+            <Menu.Item link>
+              <Link  to="/about">about</Link>
+            </Menu.Item>            
+
+          </Menu>
+
           <Route exact path="/" render={() => <AnecdoteList anecdotes = {anecdotes}/>} />
           <Route exact path="/create" render={() => {
             return(
@@ -187,14 +188,14 @@ const App = () => {
           <Route exact path="/about" render={() => <About />} />
           <Route exact path = "/anecdotes/:id" render= {({match})=> 
             <Anecdote anecdote = {anecdoteById(match.params.id)} />
-          } />
+          } /> 
 
         </div>
       </Router>
-    </div>      
+    <div>      
       <Footer />
     </div>
-    </Container>
+  </Container>
   )
 }
 
