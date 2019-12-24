@@ -7,7 +7,7 @@ import {
 
 import { Container } from 'semantic-ui-react'
 import { Table } from 'semantic-ui-react'
-import { Form, Button } from 'semantic-ui-react'
+import { Form, Button, Message } from 'semantic-ui-react'
 
 
 
@@ -82,7 +82,7 @@ const CreateNewNoHistory = (props) => {
         </Form.Field>
         <Form.Field>
           <label>author</label>
-          <input name='content' value={content} onChange={(e) => setContent(e.target.value)} />
+          <input name='author' value={author} onChange={(e) => setAuthor(e.target.value)} />
         </Form.Field>
         <Form.Field>
           <label>url for more info</label>
@@ -157,6 +157,12 @@ const App = () => {
 
   return (
     <Container>
+      {(notification && 
+        <Message success>
+          {notification}
+        </Message>
+      )}
+
     <div>
       <h1>Software anecdotes</h1>
       <div>
