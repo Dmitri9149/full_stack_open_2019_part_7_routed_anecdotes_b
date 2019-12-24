@@ -43,7 +43,7 @@ const Footer = () => (
   </div>
 )
 
-const CreateNew = (props) => {
+const CreateNewNoHistory = (props) => {
   const [content, setContent] = useState('')
   const [author, setAuthor] = useState('')
   const [info, setInfo] = useState('')
@@ -55,8 +55,9 @@ const CreateNew = (props) => {
       content,
       author,
       info,
-      votes: 0
+      votes: 0 
     })
+    props.history.push('/')
   }
 
 
@@ -82,6 +83,8 @@ const CreateNew = (props) => {
   )
 
 }
+
+const CreateNew = withRouter(CreateNewNoHistory)
 
 
 const Anecdote = ({anecdote}) => {
@@ -117,6 +120,8 @@ const App = () => {
   const addNew = (anecdote) => {
     anecdote.id = (Math.random() * 10000).toFixed(0)
     setAnecdotes(anecdotes.concat(anecdote))
+    setNotification (`A new anedote ${anecdote.content} created`)
+    setTimeout (()=> {setNotification('')}, 10000)
   }
 
   const anecdoteById = (id) => {
@@ -143,6 +148,9 @@ const App = () => {
     <div>
       <h1>Software anecdotes</h1>
       <div>
+        {notification}
+      </div>
+      <div>
       <Router>
         <div>
           <div>
@@ -151,9 +159,15 @@ const App = () => {
             <Link style={padding} to="/about">about</Link>
           </div>
           <Route exact path="/" render={() => <AnecdoteList anecdotes = {anecdotes}/>} />
-          <Route exact path="/create" render={() => <CreateNew addNew = {addNew}/>} />
+          <Route exact path="/create" render={() => {
+            return(
+              <div>
+                <CreateNew addNew = {addNew}/>
+              </div>
+            )}
+            }/>
           <Route exact path="/about" render={() => <About />} />
-          <Route exct path = "/anecdotes/:id" render= {({match})=> 
+          <Route exact path = "/anecdotes/:id" render= {({match})=> 
             <Anecdote anecdote = {anecdoteById(match.params.id)} />
           } />
 
