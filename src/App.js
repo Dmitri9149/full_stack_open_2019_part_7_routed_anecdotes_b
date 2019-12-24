@@ -5,17 +5,26 @@ import {
   Route, Link, Redirect, withRouter
 } from 'react-router-dom'
 
+import { Container } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
+
 
 const AnecdoteList = ({ anecdotes }) => (
   <div>
     <h2>Anecdotes</h2>
-    <ul>
-      {anecdotes.map(anecdote =>
-         <li key={anecdote.id} >
-          <Link to = {`/anecdotes/${anecdote.id}`}>{anecdote.content}</Link>
-         </li>
-      )}
-    </ul>
+    <Table striped celled>
+      <Table.Body>
+        {anecdotes.map(anecdote =>
+          <Table.Row key={anecdote.id}>
+            <Table.Cell>
+              <Link to = {`/anecdotes/${anecdote.id}`}>
+                {anecdote.content}
+              </Link>
+            </Table.Cell>
+          </Table.Row>
+        )}
+      </Table.Body>
+    </Table>
   </div>
 )
 
@@ -145,6 +154,7 @@ const App = () => {
 
 
   return (
+    <Container>
     <div>
       <h1>Software anecdotes</h1>
       <div>
@@ -176,6 +186,7 @@ const App = () => {
     </div>      
       <Footer />
     </div>
+    </Container>
   )
 }
 
